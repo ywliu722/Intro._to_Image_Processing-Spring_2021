@@ -3,6 +3,27 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
+def fft_2d(_img):
+
+    # 2D FFT
+    f = np.fft.fft2(_img)
+    fshift = np.fft.fftshift(f)
+
+    # calculate magnitude
+    magnitude = np.abs(fshift)
+
+    # do intensity transformation on magnitude
+    magnitude_spectrum = ...(magnitude)
+
+    # plot Input Image
+    plt.subplot(121), plt.imshow(_img, cmap='gray')
+    plt.title('Input Image'), plt.xticks([]), plt.yticks([])
+    # plot Magnitude Spectrum
+    plt.subplot(122), plt.imshow(magnitude_spectrum, cmap='gray')
+    plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
+    plt.show()
+
+
 def dft_2d(_img):
     # 2D DFT
     dft = cv.dft(np.float32(_img), flags=cv.DFT_COMPLEX_OUTPUT)
@@ -12,8 +33,7 @@ def dft_2d(_img):
     magnitude = cv.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1])
 
     # do intensity transformation on magnitude
-    magnitude_spe = (255 / np.log(1+np.amax(magnitude)))*np.log(1+magnitude)
-    magnitude_spectrum = (255 / (255**2.5)) * (magnitude_spe ** 2.5)
+    magnitude_spectrum = ...(magnitude)
 
     # plot Input Image
     plt.subplot(121), plt.imshow(_img, cmap='gray')
@@ -27,7 +47,10 @@ def dft_2d(_img):
 if __name__ == '__main__':
 
     # Load image
-    img = cv.imread('Q4.tif', 0)
+    img = cv.imread('Q3.tif', 0)
 
     # do DFT on img you loaded
     dft_2d(img)
+
+
+
